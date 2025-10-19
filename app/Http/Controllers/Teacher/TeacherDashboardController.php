@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class DashboardController extends Controller
+class TeacherDashboardController extends Controller
 {
     public function index(): View
     {
-        return view('student.dashboard');
+        return view('teacher.dashboard');
     }
 }
 
