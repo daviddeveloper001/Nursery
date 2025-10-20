@@ -6,12 +6,13 @@
             {{-- Usamos un componente reutilizable para los enlaces --}}
             <li>
                 <x-layouts.sidebar-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                    {{ __('Dashboard') }}
+                    Dashboard
                 </x-layouts.sidebar-link>
             </li>
             <li>
-                {{-- Aquí irían otros enlaces como "Gestión de Usuarios", "Configuración", etc. --}}
-                {{-- <x-layouts.sidebar-link href="#">Gestión de Usuarios</x-layouts.sidebar-link> --}}
+                <x-layouts.sidebar-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    Gestión de Usuarios
+                </x-layouts.sidebar-link>
             </li>
         </ul>
     </nav>

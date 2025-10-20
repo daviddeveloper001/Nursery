@@ -3,63 +3,77 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\User;
+use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(private UserService $userService) {}
+    public function index(): View
     {
-        //
+        $users = $this->userService->getAllUsers(15); // 15 por página
+        return view('admin.users.index', compact('users'));
+    }
+
+
+    /**
+     * Muestra el formulario para crear un nuevo usuario.
+     */
+    public function create(): View
+    {
+        $roles = $this->userService->getAvailableRoles();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Almacena un nuevo usuario en la base de datos.
      */
-    public function create()
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        //
+        $this->userService->createNewUser($request->validated());
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Muestra los detalles de un usuario específico.
      */
-    public function store(Request $request)
+    public function show(User $user): View
     {
-        //
+        // Laravel hace el find() automáticamente gracias al Route Model Binding.
+        return view('admin.users.show', compact('user'));
     }
 
     /**
-     * Display the specified resource.
+     * Muestra el formulario para editar un usuario existente.
      */
-    public function show(string $id)
+    public function edit(User $user): View
     {
-        //
+        $roles = $this->userService->getAvailableRoles();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Actualiza un usuario existente en la base de datos.
      */
-    public function edit(string $id)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        //
+        $this->userService->updateExistingUser($user->id, $request->validated());
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Elimina un usuario de la base de datos.
      */
-    public function update(Request $request, string $id)
+    public function destroy(User $user): RedirectResponse
     {
-        //
-    }
+        $this->userService->deleteUserById($user->id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado exitosamente.');
     }
 }
