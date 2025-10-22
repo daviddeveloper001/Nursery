@@ -1,7 +1,7 @@
-{{-- Sidebar para el rol de Administrador --}}
+<!-- {{-- Sidebar para el rol de Administrador --}}
 <div class="w-64 h-screen bg-gray-800 text-white p-4">
     <h3 class="text-lg font-bold mb-4">Menú Admin</h3>
-    <nav>
+    <nav> 
         <ul>
             {{-- Usamos un componente reutilizable para los enlaces --}}
             <li>
@@ -16,4 +16,4 @@
             </li>
         </ul>
     </nav>
-</div>
+</div> -->

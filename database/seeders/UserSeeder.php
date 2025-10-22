@@ -33,9 +33,9 @@ class UserSeeder extends Seeder
         );
 
         $studentUser = User::firstOrCreate(
-            ['email' => 'student@nursery.com'],
+            ['email' => 'father@nursery.com'],
             [
-                'name' => 'Estudiante',
+                'name' => 'Padre',
                 'password' => bcrypt('password'),
             ]
             );
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         // Obtenemos el rol 'Admin' que fue creado por el RoleSeeder.
         $adminRole = Role::findByName('Admin');
         $teacherRole = Role::findByName('Profesor');
-        $studentRole = Role::findByName('Estudiante');
+        $studentRole = Role::findByName('Padre');
 
 
         // Asignamos el rol al usuario.

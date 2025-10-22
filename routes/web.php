@@ -9,7 +9,7 @@ use App\Http\Controllers\Student\StudentDashboardController;
 use App\Http\Controllers\Teacher\TeacherDashboardController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 require __DIR__.'/auth.php';
@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [TeacherDashboardController::class, 'index'])->name('dashboard');
     });
 
-    Route::middleware(['role:Estudiante'])->prefix('student')->name('student.')->group(function () {
+    Route::middleware(['role:Padre'])->prefix('student')->name('student.')->group(function () {
         Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('dashboard');
 
     });

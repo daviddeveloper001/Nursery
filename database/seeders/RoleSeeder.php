@@ -19,6 +19,6 @@ class RoleSeeder extends Seeder
         // Usamos firstOrCreate para evitar duplicados si el seeder se ejecuta múltiples veces.
         Role::firstOrCreate(['name' => 'Admin']);
         Role::firstOrCreate(['name' => 'Profesor']);
-        Role::firstOrCreate(['name' => 'Estudiante']);
+        Role::firstOrCreate(['name' => 'Padre']);
     }
 }
